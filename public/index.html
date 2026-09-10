@@ -1,31 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no" />
-<meta name="theme-color" content="#0a0a0b" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<title>ERASKYE</title>
-<link rel="stylesheet" href="/css/style.css" />
-</head>
-<body>
-<div id="app">
-  <header class="topbar">
-    <div class="logo">ERA<span>SKYE</span></div>
-    <button class="icon-btn" id="logoutBtn" title="Logout">⎋</button>
-  </header>
-  <main id="main"></main>
-  <nav class="bottom-nav">
-    <button data-view="feed" class="nav-item">⌂<span>Home</span></button>
-    <button data-view="search" class="nav-item">⌕<span>Search</span></button>
-    <button data-view="create" class="nav-item nav-create">+</button>
-    <button data-view="notifications" class="nav-item">♥<span>Alerts</span><i class="badge" id="notifBadge" hidden></i></button>
-    <button data-view="profile" class="nav-item">◉<span>Profile</span></button>
-  </nav>
-</div>
-<div id="modalRoot"></div>
-<div id="toast" class="toast"></div>
-<script type="module" src="/js/app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ERASKYE</title>
+    <style>
+      :root {
+        --bg: #0b1020;
+        --panel: #121a2b;
+        --accent: #7dd3fc;
+        --text: #e5eefb;
+        --muted: #b7c5da;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, var(--bg), #1a2338 60%, #0f172a);
+        font-family: Arial, sans-serif;
+        color: var(--text);
+      }
+      .card {
+        width: min(720px, 90vw);
+        background: rgba(18, 26, 43, 0.9);
+        border: 1px solid rgba(125, 211, 252, 0.35);
+        border-radius: 20px;
+        padding: 40px 32px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      }
+      h1 {
+        margin: 0 0 12px;
+        font-size: clamp(2rem, 5vw, 4rem);
+        letter-spacing: 0.08em;
+        color: var(--accent);
+      }
+      p {
+        color: var(--muted);
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      .status {
+        margin-top: 24px;
+        padding: 12px 16px;
+        border-radius: 10px;
+        background: rgba(125, 211, 252, 0.08);
+        border: 1px solid rgba(125, 211, 252, 0.25);
+        color: var(--text);
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1>ERASKYE</h1>
+      <p>Project restored and running in GitHub Codespaces.</p>
+      <div class="status">Status: ready</div>
+    </main>
+  </body>
 </html>

@@ -1,6 +1,4 @@
-node_modules
-database
-uploads
+node_modules/
 .env
+npm-debug.log*
 .DS_Store
-*.log
