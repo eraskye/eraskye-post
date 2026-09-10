@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0a0c">
+<title>ERASKYE — Posts</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  background:#08080a;
+  color:#f5f5f7;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+  min-height:100vh;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  width:320px;
+  height:320px;
+  background:#ff003c;
+  filter:blur(150px);
+  opacity:.08;
+  top:-100px;
+  left:50%;
+  transform:translateX(-50%);
+  pointer-events:none;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  background:rgba(8,8,10,.78);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.logo{
+  font-size:21px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.logo span{
+  color:#ff174f;
+}
+
+.profile{
+  width:39px;
+  height:39px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(145deg,#ff174f,#72001e);
+  font-weight:800;
+  box-shadow:0 0 20px rgba(255,23,79,.2);
+}
+
+.container{
+  width:100%;
+  max-width:680px;
+  margin:auto;
+  padding:18px 14px 100px;
+}
+
+.create{
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:22px;
+  padding:15px;
+  margin-bottom:18px;
+  box-shadow:0 15px 50px rgba(0,0,0,.18);
+}
+
+.create-top{
+  display:flex;
+  gap:12px;
+}
+
+.avatar{
+  width:43px;
+  height:43px;
+  min-width:43px;
+  border-radius:50%;
+  background:#15151a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  color:#ff174f;
+}
+
+textarea{
+  width:100%;
+  min-height:45px;
+  max-height:160px;
+  resize:none;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:white;
+  font-size:16px;
+  font-family:inherit;
+  padding:10px 4px;
+}
+
+textarea::placeholder{
+  color:#77777f;
+}
+
+.create-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:8px;
+}
+
+.add-photo{
+  color:#a8a8af;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.add-photo:hover{
+  color:white;
+}
+
+input[type=file]{
+  display:none;
+}
+
+.post-btn{
+  border:0;
+  background:#ff174f;
+  color:white;
+  padding:10px 19px;
+  border-radius:13px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.post-btn:active{
+  transform:scale(.95);
+}
+
+.post{
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.075);
+  border-radius:22px;
+  padding:16px;
+  margin-bottom:14px;
+  animation:show .3s ease;
+}
+
+@keyframes show{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.post-head{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.post-info{
+  flex:1;
+}
+
+.username{
+  font-weight:800;
+  font-size:15px;
+}
+
+.time{
+  color:#707078;
+  font-size:12px;
+  margin-top:2px;
+}
+
+.post-text{
+  font-size:16px;
+  line-height:1.5;
+  margin:15px 2px;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+
+.post-image{
+  width:100%;
+  border-radius:16px;
+  margin-top:4px;
+  display:block;
+  max-height:600px;
+  object-fit:cover;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+}
+
+.action{
+  border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.035);
+  color:#aaaab2;
+  border-radius:12px;
+  padding:9px 13px;
+  cursor:pointer;
+  font-size:14px;
+  transition:.2s;
+}
+
+.action:hover{
+  background:rgba(255,255,255,.08);
+  color:white;
+}
+
+.action.liked{
+  color:#ff174f;
+  border-color:rgba(255,23,79,.25);
+}
+
+.delete{
+  color:#777;
+  font-size:13px;
+  cursor:pointer;
+}
+
+.delete:hover{
+  color:#ff174f;
+}
+
+.empty{
+  text-align:center;
+  padding:60px 20px;
+  color:#66666e;
+}
+
+.empty strong{
+  display:block;
+  color:#aaa;
+  font-size:18px;
+  margin-bottom:7px;
+}
+
+@media(max-width:500px){
+  .container{
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .post,.create{
+    border-radius:19px;
+  }
+
+  header{
+    padding:0 14px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">ERAS<span>KYE</span></div>
+  <div class="profile">E</div>
+</header>
+
+<main class="container">
+
+  <section class="create">
+    <div class="create-top">
+      <div class="avatar">E</div>
+
+      <textarea id="postText" placeholder="Что нового?"></textarea>
+    </div>
+
+    <div class="create-bottom">
+      <label class="add-photo">
+        ＋ Фото
+        <input id="photoInput" type="file" accept="image/*">
+      </label>
+
+      <button class="post-btn" onclick="createPost()">Опубликовать</button>
+    </div>
+  </section>
+
+  <section id="feed"></section>
+
+</main>
+
+<script>
+let posts = JSON.parse(localStorage.getItem("eraskye_posts") || "[]");
+let selectedImage = null;
+
+const photoInput = document.getElementById("photoInput");
+
+photoInput.addEventListener("change", function(){
+  const file = this.files[0];
+
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+    selectedImage = e.target.result;
+  };
+
+  reader.readAsDataURL(file);
+});
+
+function save(){
+  localStorage.setItem("eraskye_posts", JSON.stringify(posts));
+}
+
+function createPost(){
+
+  const text = document.getElementById("postText").value.trim();
+
+  if(!text && !selectedImage){
+    alert("Напиши текст или добавь фото 😈");
+    return;
+  }
+
+  const post = {
+    id:Date.now(),
+    username:"eraskye",
+    text:text,
+    image:selectedImage,
+    time:new Date().toLocaleString("ru-RU",{
+      day:"2-digit",
+      month:"2-digit",
+      hour:"2-digit",
+      minute:"2-digit"
+    }),
+    likes:0,
+    liked:false
+  };
+
+  posts.unshift(post);
+
+  save();
+
+  document.getElementById("postText").value="";
+  photoInput.value="";
+  selectedImage=null;
+
+  render();
+}
+
+function likePost(id){
+
+  const post = posts.find(p => p.id === id);
+
+  if(!post) return;
+
+  post.liked = !post.liked;
+  post.likes += post.liked ? 1 : -1;
+
+  save();
+  render();
+}
+
+function deletePost(id){
+
+  if(!confirm("Удалить этот пост?")) return;
+
+  posts = posts.filter(p => p.id !== id);
+
+  save();
+  render();
+}
+
+function render(){
+
+  const feed = document.getElementById("feed");
+
+  if(posts.length === 0){
+
+    feed.innerHTML = `
+      <div class="empty">
+        <strong>Пока тут пусто</strong>
+        Первый пост можешь сделать прямо сейчас.
+      </div>
+    `;
+
+    return;
+  }
+
+  feed.innerHTML = posts.map(post => `
+
+    <article class="post">
+
+      <div class="post-head">
+
+        <div class="avatar">
+          ${post.username.charAt(0).toUpperCase()}
+        </div>
+
+        <div class="post-info">
+          <div class="username">@${escapeHTML(post.username)}</div>
+          <div class="time">${post.time}</div>
+        </div>
+
+        <div class="delete" onclick="deletePost(${post.id})">
+          Удалить
+        </div>
+
+      </div>
+
+      ${post.text ? `
+        <div class="post-text">
+          ${escapeHTML(post.text)}
+        </div>
+      ` : ""}
+
+      ${post.image ? `
+        <img class="post-image" src="${post.image}">
+      ` : ""}
+
+      <div class="actions">
+
+        <button
+          class="action ${post.liked ? "liked" : ""}"
+          onclick="likePost(${post.id})">
+          ♥ ${post.likes}
+        </button>
+
+        <button class="action">
+          💬 Комментировать
+        </button>
+
+      </div>
+
+    </article>
+
+  `).join("");
+}
+
+function escapeHTML(text){
+
+  return text
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+render();
+</script>
+
+</body>
+</html>
